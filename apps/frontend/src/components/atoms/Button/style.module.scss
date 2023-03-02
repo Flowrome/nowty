@@ -123,11 +123,7 @@
     }
   }
   &--type-blank {
-    --color-base: var(--color-background-base);
-    --color-contrast: var(--color-background-contrast);
-    --color-shade: var(--color-background-shade);
-    --color-shade-rgb: var(--color-background-shade-rgb);
-    --color-tint: var(--color-background-tint);
+    --new-color-contrast: var(--color-background-contrast);
     padding: 4px;
     box-sizing: border-box;
     box-shadow: none;
@@ -135,12 +131,15 @@
     background: none;
     box-sizing: border-box;
     outline-color: none;
-    color: var(--color-contrast);
+    color: var(--new-color-contrast);
+    opacity: 0.85;
     &:hover:enabled {
+      opacity: 1;
       transform: none;
       color: var(--color-shade);
     }
     &:active:enabled {
+      opacity: 1;
       color: var(--color-tint);
     }
   }

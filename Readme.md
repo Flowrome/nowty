@@ -34,14 +34,14 @@ services:
     build:
       context: ./apps/backend
       dockerfile: dockerfile
-    args:
-      OV_BE_DB_USER: <YOUR_DB_USERNAME *Required>
-      OV_BE_DB_PASSWORD: <YOUR_DB_PASSWORD *Required>
-      # OV_BE_DB_PORT: 27018
-      # OV_BE_DB_HOST: nowty_db
-      # OV_BE_HOST: nowty_be
-      # OV_BE_PORT: 4538
-      # OV_BE_DEFAULT_LANG: en
+      args:
+        OV_BE_DB_USER: <YOUR_DB_USERNAME *Required>
+        OV_BE_DB_PASSWORD: <YOUR_DB_PASSWORD *Required>
+        # OV_BE_DB_PORT: 27018
+        # OV_BE_DB_HOST: nowty_db
+        # OV_BE_HOST: nowty_be
+        # OV_BE_PORT: 4538
+        # OV_BE_DEFAULT_LANG: en
     ports:
       - 4538:4538
     depends_on:
@@ -51,11 +51,11 @@ services:
     build:
       context: ./apps/frontend
       dockerfile: dockerfile
-    args:
-      OV_FE_API_BASEURL: http://<YOUR_MACHINE_IP/DOMAIN *Required>:4538/api
-      # OV_FE_HOST: 0.0.0.0
-      # OV_FE_PORT: 4537
-      # OV_FE_DEFAULT_LANG: en
+      args:
+        OV_FE_API_BASEURL: http://<YOUR_MACHINE_IP/DOMAIN *Required>:4538/api
+        # OV_FE_HOST: 0.0.0.0
+        # OV_FE_PORT: 4537
+        # OV_FE_DEFAULT_LANG: en
     ports:
       - 4537:4537
     depends_on:

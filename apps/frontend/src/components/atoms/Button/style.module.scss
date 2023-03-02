@@ -77,7 +77,6 @@
     --color-shade-rgb: var(--color-light-shade-rgb);
     --color-tint: var(--color-light-tint);
   }
-  color: var(--color-contrast);
   &:focus {
     outline-color: var(--color-contrast);
   }
@@ -124,6 +123,11 @@
     }
   }
   &--type-blank {
+    --color-base: var(--color-background-base);
+    --color-contrast: var(--color-background-contrast);
+    --color-shade: var(--color-background-shade);
+    --color-shade-rgb: var(--color-background-shade-rgb);
+    --color-tint: var(--color-background-tint);
     padding: 4px;
     box-sizing: border-box;
     box-shadow: none;

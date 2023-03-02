@@ -16,8 +16,9 @@ Download the repository and run inside the root of the project:
 - `docker compose up -d --build`
 
 Here's the `docker-compose.yaml` content:
+
 ```yaml
-version: '3.9'
+version: "3.9"
 services:
   nowty_db:
     image: mongo:4.4.19
@@ -63,7 +64,6 @@ services:
     restart: unless-stopped
 ```
 
-
 ## Which APIs are implemented
 
 - ChatCompletion (model: [gpt-3.5-turbo](https://platform.openai.com/docs/guides/chat/chat-completions-beta))
@@ -85,3 +85,13 @@ services:
 
 You can find the translation files under `apps/backend/statics/langs/*.json`, you can also add your language by providing your json file and put in the folder with the language short name like `apps/backend/statics/langs/fr.json`.
 The frontend application should use the browser language, if nothing has been found it will rely on the `OV_FE_DEFAULT_LANG` you set in the `docker-compose.yaml` file args
+
+## Preview
+
+Here are some screenshot took from an iphone:
+
+<div style='display: flex; gap: 12px;'>
+  <img style='height: 400px;' src='images/chats.jpeg'>
+  <img style='height: 400px;' src='images/turbo.jpeg'>
+  <img style='height: 400px;' src='images/davinci.jpeg'>
+</div>

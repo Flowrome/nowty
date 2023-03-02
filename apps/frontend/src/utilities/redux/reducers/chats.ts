@@ -11,6 +11,7 @@ export interface Chat {
     bot_datetime: string;
     user_datetime?: string;
     to_exclude?: boolean;
+    is_context?: boolean;
   }[];
   usages?: {
     total_tokens: number;

@@ -18,6 +18,11 @@
     &__textarea {
       flex: 1;
     }
+    &__button {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
   }
   &__bubble-container {
     flex: 1 1 calc(100% - 200px - 24px);

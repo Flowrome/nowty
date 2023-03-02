@@ -6,6 +6,7 @@ from bson.objectid import ObjectId
 from utilities.openai import ask, ask_turbo
 from utilities.env import env
 from flask_cors import cross_origin
+from utilities.lang import translate
 
 message_api = Blueprint("message", __name__)
 
@@ -33,14 +34,20 @@ def message_post_method(chat_id):
             return jsonify({"error": "CHAT.NO_CHAT_FOUND"}), 404
         response, total_usage, usage_prompt, usage_completion = "", 0, 0, 0
         if turbo:
-            response, total_usage, usage_prompt, usage_completion = ask_turbo(
-                message, chat_cursor["messages"]
-            )
+            set_context = request.get_json().get("set_context", False)
+            if set_context and len(chat_cursor["messages"]) < 2:
+                message_object["is_context"] = True
+                message_object["bot"] = translate("backend.chat.setted_context")
+            else:
+                response, total_usage, usage_prompt, usage_completion = ask_turbo(
+                    message, chat_cursor["messages"]
+                )
+                message_object["bot"] = response
         else:
             response, total_usage, usage_prompt, usage_completion = ask(
                 message, chat_cursor["messages"], lang
             )
-        message_object["bot"] = response
+            message_object["bot"] = response
         date = str(datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"))
         message_object["bot_datetime"] = date
         messages = chat_cursor["messages"] + [message_object]

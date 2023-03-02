@@ -25,16 +25,29 @@ def ask_question(question, chat_log=None, engine="davinci", max_tokens=64, lang=
     return message, total_usage, usage_prompt, usage_completion
 
 
-def ask_question_turbo(
-    question, chat_log=[], engine="gpt-3.5-turbo"
-):
-    prompt = [{"role": "user", "content": question}]
+def find_system(lst, key, value):
+    for i, dic in enumerate(lst):
+        if dic[key] == value:
+            return i
+    return -1
 
+
+def ask_question_turbo(question, chat_log=[], engine="gpt-3.5-turbo"):
+    prompt = [
+        {
+            "role": "user",
+            "content": question,
+        }
+    ]
     if len(chat_log) > 0:
-        chat_log = chat_log[-5:]
+        system_message = chat_log[find_system(chat_log, "role", "system")]
+        chat_log = chat_log[-9:]
+        if system_message:
+            chat_log = [system_message] + chat_log
 
     messages = chat_log + prompt
-    
+
+
     completions = openai.ChatCompletion.create(
         model=engine,
         messages=messages,
@@ -60,10 +73,15 @@ def parse_chat_log(elem, lang):
 
 
 def parse_chat_log_turbo(elem):
-    return [
-        {"role": "user", "content": elem["user"]},
-        {"role": "assistant", "content": elem["bot"]},
-    ]
+    to_return = (
+        [
+            {"role": "user", "content": elem["user"]},
+            {"role": "assistant", "content": elem["bot"]},
+        ]
+        if not elem.get("is_context", False)
+        else [{"role": "system", "content": elem["user"]}]
+    )
+    return to_return
 
 
 def init(api_key):

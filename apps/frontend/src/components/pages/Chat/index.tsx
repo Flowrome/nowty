@@ -144,7 +144,10 @@ export const Chat = () => {
               `${
                 import.meta.env.FE_API_BASEURL
               }/message/send/${chatId}?turbo=${Number(chat?.is_turbo)}&lang=${
-                window?.navigator?.language.split('-')[0].split('_')[0].toLowerCase() || import.meta.env.FE_DEFAULT_LANG
+                window?.navigator?.language
+                  .split("-")[0]
+                  .split("_")[0]
+                  .toLowerCase() || import.meta.env.FE_DEFAULT_LANG
               }`,
               {
                 method: "POST",
@@ -195,6 +198,60 @@ export const Chat = () => {
             {/*@ts-ignore*/}
             <ion-icon name="send-outline" size="large"></ion-icon>
           </Button>
+          {chat?.is_turbo && chat.messages && chat.messages?.length < 2 && (
+            <Button
+              disabled={!message || waitingForMessage}
+              _type="icon"
+              type="button"
+              _color="secondary"
+              onClick={async () => {
+                try {
+                  setWaitingForMessage(true);
+                  const response = await fetch(
+                    `${
+                      import.meta.env.FE_API_BASEURL
+                    }/message/send/${chatId}?turbo=${Number(
+                      chat?.is_turbo
+                    )}&lang=${
+                      window?.navigator?.language
+                        .split("-")[0]
+                        .split("_")[0]
+                        .toLowerCase() || import.meta.env.FE_DEFAULT_LANG
+                    }`,
+                    {
+                      method: "POST",
+                      headers: {
+                        "Content-Type": "application/json",
+                      },
+                      body: JSON.stringify({
+                        message,
+                        set_context: true,
+                      }),
+                    }
+                  );
+                  if (!response.ok) {
+                    throw await response.json();
+                  }
+                  if (chatId) {
+                    dispatch(fetchChat({ chatId }));
+                  }
+                } catch (err: any) {
+                  dispatch(
+                    sendNotification({
+                      color: "error",
+                      message: err?.error || "COMMON_ERROR",
+                    })
+                  );
+                } finally {
+                  setMessage("");
+                  setWaitingForMessage(false);
+                }
+              }}
+            >
+              {/*@ts-ignore*/}
+              <ion-icon name="newspaper-outline" size="large"></ion-icon>
+            </Button>
+          )}
         </div>
       </form>
     </div>

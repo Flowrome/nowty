@@ -13,7 +13,6 @@ class MongoInstance:
         if password and user:
             auth_uri = f'{user}:{password}@'
         mongo_uri = f'mongodb://{auth_uri}{host}:{port}/admin'
-        print(mongo_uri, env())
         self._client = MongoClient(mongo_uri)
         self._db = self._client[db]
         self._config = self._db[f"config_{env().get('BE_ENV')}"]

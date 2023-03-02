@@ -123,7 +123,6 @@
     }
   }
   &--type-blank {
-    --new-color-contrast: var(--color-background-contrast);
     padding: 4px;
     box-sizing: border-box;
     box-shadow: none;
@@ -131,7 +130,7 @@
     background: none;
     box-sizing: border-box;
     outline-color: none;
-    color: var(--new-color-contrast);
+    color: var(--color-background-contrast);
     opacity: 0.85;
     &:hover:enabled {
       opacity: 1;

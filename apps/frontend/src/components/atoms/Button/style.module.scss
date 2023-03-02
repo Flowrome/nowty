@@ -77,6 +77,7 @@
     --color-shade-rgb: var(--color-light-shade-rgb);
     --color-tint: var(--color-light-tint);
   }
+  color: var(--color-contrast);
   &:focus {
     outline-color: var(--color-contrast);
   }

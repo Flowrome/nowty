@@ -1,0 +1,17 @@
+.register-api-key {
+  margin: 24px auto;
+  display: flex;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &__row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    width: 100%;
+    &__input {
+      flex: 1;
+    }
+  }
+}

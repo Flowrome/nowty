@@ -1,0 +1,39 @@
+:root {
+  --header-height: 72px;
+  @media (min-width: 992px) {
+    --header-height: 96px;
+  }
+}
+
+.main {
+  display: flex;
+  width: 100%;
+  &--height-auto {
+    height: auto;
+  }
+  &--height-full {
+    min-height: calc(100% - var(--header-height));
+    &.main--no-header {
+      min-height: 100%;
+    }
+  }
+  &--height-header-fixed {
+    height: 100%;
+    overflow-y: auto;
+    max-height: calc(100% - var(--header-height));
+    &.main--no-header {
+      max-height: 100%;
+    }
+  }
+  > div {
+    width: 100%;
+  }
+}
+
+.header {
+  height: var(--header-height);
+  width: 100%;
+}
+
+.footer {
+}

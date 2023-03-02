@@ -1,0 +1,35 @@
+{
+  "name": "nowty",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "flowrome <romeonupieri@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "yinit": "yarn && python3 -m venv venv && source venv/bin/activate && concurrently -n \"client,server\" -c \"##CC5A71,#3F84E5\" \"yarn yinit:fe\" \"yarn yinit:be\"",
+    "yinit:fe": "cd apps/frontend && yarn",
+    "yinit:be": "pip install -r apps/backend/requirements.txt",
+    "start": "concurrently -n \"client,server,db\" -c \"##CC5A71,#3F84E5,#FFED66\" \"yarn start:local:fe\" \"yarn start:local:be\" \"yarn start:local:db\"",
+    "start:development": "concurrently -n \"client,server,db\" -c \"##CC5A71,#3F84E5,#FFED66\" \"yarn start:development:fe\" \"yarn start:development:be\" \"yarn start:local:db\"",
+    "start:production": "concurrently -n \"client,server,db\" -c \"##CC5A71,#3F84E5,#FFED66\" \"yarn start:production:fe\" \"yarn start:production:be\" \"yarn start:local:db\"",
+    "start:local:fe": "cd ./apps/frontend && yarn run dev --mode development",
+    "start:local:be": "cd ./apps/backend && BE_ENV=development python app.py",
+    "start:development:fe": "cd ./apps/frontend && FE_ENV=development yarn run dev",
+    "start:development:be": "cd ./apps/backend && BE_ENV=development python app.py",
+    "start:production:fe": "cd ./apps/frontend && FE_ENV=production yarn run preview",
+    "start:production:be": "cd ./apps/backend && BE_ENV=production gunicorn --bind=0.0.0.0:3001 wsgi:app --timeout 200",
+    "start:local:db": "rm -rf apps/db && mkdir apps/db && rm -rf mongolog && mkdir mongolog && mongod --fork --dbpath apps/db --port 3002 --logpath mongolog/log"
+  },
+  "devDependencies": {
+    "@types/node": "^18.11.19",
+    "concurrently": "^7.6.0"
+  },
+  "dependencies": {
+    "localforage": "^1.10.0",
+    "match-sorter": "^6.3.1",
+    "react-router-dom": "^6.8.1",
+    "sort-by": "^1.2.0"
+  },
+  "resolutions": {
+    "styled-components": "^5"
+  }
+}

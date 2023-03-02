@@ -1,0 +1,51 @@
+FROM python:3.11
+
+WORKDIR /containers/nowty/backend
+
+COPY requirements.txt requirements.txt
+
+RUN python3 -m pip install -r requirements.txt
+
+COPY src src
+COPY statics statics
+COPY utilities utilities
+COPY app.py app.py
+COPY wsgi.py wsgi.py
+
+# INIT ENV VARIABLES
+ARG OV_BE_DB_USER
+ARG OV_BE_DB_PASSWORD
+ARG OV_BE_HOST=nowty_be
+ARG OV_BE_PORT=4538
+ARG OV_BE_DB_HOST=nowty_db
+ARG OV_BE_DB_PORT=27018
+ARG OV_BE_DB_NAME=nowty
+ARG OV_BE_DEFAULT_LANG=en
+
+ENV BE_ENV production
+ENV BE_HOST ${OV_BE_HOST}
+ENV BE_PORT ${OV_BE_PORT}
+ENV BE_DB_HOST ${OV_BE_DB_HOST}
+ENV BE_DB_PORT ${OV_BE_DB_PORT}
+ENV BE_DB_NAME ${OV_BE_DB_NAME}
+ENV BE_DB_USER ${OV_BE_DB_USER}
+ENV BE_DB_PASSWORD ${OV_BE_DB_PASSWORD}
+ENV BE_DEFAULT_LANG ${OV_BE_DEFAULT_LANG}
+
+RUN mkdir ./envs
+RUN touch ./envs/.env.production
+RUN echo "BE_ENV=production" >> ./envs/.env.production
+RUN echo "BE_HOST=${OV_BE_HOST}" >> ./envs/.env.production
+RUN echo "BE_PORT=${OV_BE_PORT}" >> ./envs/.env.production
+RUN echo "BE_DB_HOST=${OV_BE_DB_HOST}" >> ./envs/.env.production
+RUN echo "BE_DB_PORT=${OV_BE_DB_PORT}" >> ./envs/.env.production
+RUN echo "BE_DB_NAME=${OV_BE_DB_NAME}" >> ./envs/.env.production
+RUN echo "BE_DB_USER=${OV_BE_DB_USER}" >> ./envs/.env.production
+RUN echo "BE_DB_PASSWORD=${OV_BE_DB_PASSWORD}" >> ./envs/.env.production
+RUN echo "BE_DEFAULT_LANG=${OV_BE_DEFAULT_LANG}" >> ./envs/.env.production
+
+# EXPOSE AND RUN
+
+EXPOSE ${OV_BE_PORT}
+
+CMD BE_ENV=production gunicorn --bind=${BE_HOST}:${BE_PORT} wsgi:app --timeout 200

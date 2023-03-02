@@ -1,0 +1,44 @@
+version: '3.9'
+services:
+  nowty_db:
+    image: mongo:4.4.19
+    restart: unless-stopped
+    ports:
+      - 27018:27018
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: <YOUR_DB_USERNAME *Required>
+      MONGO_INITDB_ROOT_PASSWORD: <YOUR_DB_PASSWORD *Required>
+    volumes:
+      - /path/to/your/db/volume:/data/db #if you want to persist your datas
+    command: mongod --port 27018 --auth
+  nowty_be:
+    build:
+      context: ./apps/backend
+      dockerfile: dockerfile
+    args:
+      OV_BE_DB_USER: <YOUR_DB_USERNAME *Required>
+      OV_BE_DB_PASSWORD: <YOUR_DB_PASSWORD *Required>
+      # OV_BE_DB_PORT: 27018
+      # OV_BE_DB_HOST: nowty_db
+      # OV_BE_HOST: nowty_be
+      # OV_BE_PORT: 4538
+      # OV_BE_DEFAULT_LANG: en
+    ports:
+      - 4538:4538
+    depends_on:
+      - nowty_db
+    restart: unless-stopped
+  nowty_fe:
+    build:
+      context: ./apps/frontend
+      dockerfile: dockerfile
+    args:
+      OV_FE_API_BASEURL: http://<YOUR_MACHINE_IP/DOMAIN *Required>:4538/api
+      # OV_FE_HOST: 0.0.0.0
+      # OV_FE_PORT: 4537
+      # OV_FE_DEFAULT_LANG: en
+    ports:
+      - 4537:4537
+    depends_on:
+      - nowty_be
+    restart: unless-stopped

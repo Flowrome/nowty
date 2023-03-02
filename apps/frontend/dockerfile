@@ -1,0 +1,42 @@
+FROM node
+
+WORKDIR /containers/nowty/frontend
+
+COPY ./src ./src
+COPY ./index.html ./index.html
+COPY ./package.json ./package.json
+COPY ./yarn.lock ./yarn.lock
+COPY ./vite.config.ts ./vite.config.ts
+COPY ./tsconfig.node.json ./tsconfig.node.json
+COPY ./tsconfig.json ./tsconfig.json
+
+# INIT ENV VARIABLES
+ARG OV_FE_API_BASEURL
+ARG OV_FE_HOST=0.0.0.0
+ARG OV_FE_PORT=4537
+ARG OV_FE_DEFAULT_LANG=en
+
+ENV FE_ENV production
+ENV FE_HOST=${OV_FE_HOST}
+ENV FE_DEFAULT_LANG=${OV_FE_DEFAULT_LANG}
+ENV FE_PORT=${OV_FE_PORT}
+ENV FE_API_BASEURL=${OV_FE_API_BASEURL}
+
+RUN mkdir ./envs
+RUN touch ./envs/.env.production
+RUN echo "FE_ENV=production" >> ./envs/.env.production
+RUN echo "FE_HOST=${OV_FE_HOST}" >> ./envs/.env.production
+RUN echo "FE_DEFAULT_LANG=${OV_FE_DEFAULT_LANG}" >> ./envs/.env.production
+RUN echo "FE_PORT=${OV_FE_PORT}" >> ./envs/.env.production
+RUN echo "FE_API_BASEURL=${OV_FE_API_BASEURL}" >> ./envs/.env.production
+
+RUN yarn
+
+RUN yarn build
+
+RUN rm -rf node_modules
+RUN npm i vite@latest
+# EXPOSE AND RUN
+EXPOSE ${OV_BE_PORT}
+
+CMD FE_ENV=production yarn preview:only

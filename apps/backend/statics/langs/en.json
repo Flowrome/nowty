@@ -1,0 +1,38 @@
+{
+  "backend": {
+    "chat": {
+      "welcome": "Welcome to nowty, I'm using OpenAI Completion API with your API key, this will incur costs if you have linked a payment method. For more information, click on the following links:\n\n<a target=\"_blank\" href=\"https://platform.openai.com/examples/default-qa\">Completion API</a>\n<a target=\"_blank\" href=\"https://openai.com/api/pricing/\">Pricing</a>\n<a target=\"_blank\" href=\"https://elephas.app/blog/how-to-create-openai-api-keys-cl5c4f21d281431po7k8fgyol0\">How to get an API key</a>",
+      "welcome_turbo": "Welcome to nowty, I'm using OpenAI Chat Completion API with your API key, this will incur costs if you have linked a payment method. For more information, click on the following links:\n\n<a target=\"_blank\" href=\"https://platform.openai.com/docs/guides/chat/chat-completions-beta\">Chat Completion API</a>\n<a target=\"_blank\" href=\"https://openai.com/api/pricing/\">Pricing</a>\n<a target=\"_blank\" href=\"https://elephas.app/blog/how-to-create-openai-api-keys-cl5c4f21d281431po7k8fgyol0\">How to get an API key</a>\n\nIn addition, the Chat Completion API uses the gpt-3.5-turbo model, which includes response moderation.",
+      "question": "Question",
+      "answer": "Answer"
+    }
+  },
+  "frontend": {
+    "app_name": "nowty",
+    "submit_key": {
+      "input_placeholder": "Enter your API key here"
+    },
+    "chats": {
+      "add_davinci_chat": "Davinci Chat",
+      "add_turbo_chat": "Turbo Chat",
+      "reset_api_key": "Reset API Key",
+      "textarea_placeholder": "Type your message here",
+      "generic_title_list_elem": "New Chat",
+      "types": {
+        "turbo": "Turbo",
+        "davinci": "Davinci"
+      }
+    },
+    "errors": {
+      "COMMON_ERROR": "An error has occurred, please try again later",
+      "OPENAI": {
+        "NO_API_KEY": "You have not entered any API key",
+        "API_KEY_ERROR": "The API key provided is invalid"
+      },
+      "CHAT": {
+        "CANNOT_CREATE_NEW_EMPTY_CHAT_EXISTING_ONE": "You cannot have more than one new chat",
+        "NO_CHAT_FOUND": "No chat available"
+      }
+    }
+  }
+}

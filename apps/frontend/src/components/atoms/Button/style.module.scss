@@ -1,0 +1,142 @@
+.button {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 12px 20px;
+  outline: none;
+  border: none;
+  height: var(--interactive-height);
+  transition: all 0.3s ease 0s;
+  box-shadow: 0px 8px 15px rgba(var(--color-dark-contrast-rgb), 0.1);
+  border-radius: var(--size-border);
+  cursor: pointer;
+  outline: 3px solid;
+  outline-offset: -3px;
+  outline-color: transparent;
+  font-size: 20px;
+  font-weight: 600;
+  * {
+    text-align: center;
+    text-transform: uppercase;
+    cursor: pointer;
+  }
+  &:disabled {
+    opacity: 0.6;
+    cursor: no-drop;
+    * {
+      cursor: no-drop;
+    }
+  }
+  &--color-primary {
+    --color-base: var(--color-primary-base);
+    --color-contrast: var(--color-primary-contrast);
+    --color-shade: var(--color-primary-shade);
+    --color-shade-rgb: var(--color-primary-shade-rgb);
+    --color-tint: var(--color-primary-tint);
+  }
+  &--color-secondary {
+    --color-base: var(--color-secondary-base);
+    --color-contrast: var(--color-secondary-contrast);
+    --color-shade: var(--color-secondary-shade);
+    --color-shade-rgb: var(--color-secondary-shade-rgb);
+    --color-tint: var(--color-secondary-tint);
+  }
+  &--color-error {
+    --color-base: var(--color-error-base);
+    --color-contrast: var(--color-error-contrast);
+    --color-shade: var(--color-error-shade);
+    --color-shade-rgb: var(--color-error-shade-rgb);
+    --color-tint: var(--color-error-tint);
+  }
+  &--color-warning {
+    --color-base: var(--color-warning-base);
+    --color-contrast: var(--color-warning-contrast);
+    --color-shade: var(--color-warning-shade);
+    --color-shade-rgb: var(--color-warning-shade-rgb);
+    --color-tint: var(--color-warning-tint);
+  }
+  &--color-success {
+    --color-base: var(--color-success-base);
+    --color-contrast: var(--color-success-contrast);
+    --color-shade: var(--color-success-shade);
+    --color-shade-rgb: var(--color-success-shade-rgb);
+    --color-tint: var(--color-success-tint);
+  }
+  &--color-dark {
+    --color-base: var(--color-dark-base);
+    --color-contrast: var(--color-dark-contrast);
+    --color-shade: var(--color-dark-shade);
+    --color-shade-rgb: var(--color-dark-shade-rgb);
+    --color-tint: var(--color-dark-tint);
+  }
+  &--color-light {
+    --color-base: var(--color-light-base);
+    --color-contrast: var(--color-light-contrast);
+    --color-shade: var(--color-light-shade);
+    --color-shade-rgb: var(--color-light-shade-rgb);
+    --color-tint: var(--color-light-tint);
+  }
+  &:focus {
+    outline-color: var(--color-contrast);
+  }
+  &--type-fill {
+    background-color: var(--color-base);
+    color: var(--color-contrast);
+    &:hover:enabled {
+      background-color: var(--color-shade);
+      box-shadow: 0px 15px 20px rgba(var(--color-shade-rgb), 0.4);
+      transform: translateY(-7px);
+    }
+    &:active:enabled {
+      background-color: var(--color-tint);
+    }
+  }
+  &--type-icon {
+    width: var(--interactive-height);
+    background-color: var(--color-base);
+    color: var(--color-contrast);
+    padding: 12px;
+    &:hover:enabled {
+      background-color: var(--color-shade);
+      box-shadow: 0px 15px 20px rgba(var(--color-shade-rgb), 0.4);
+      transform: translateY(-7px);
+    }
+    &:active:enabled {
+      background-color: var(--color-tint);
+    }
+  }
+  &--type-outline {
+    background: none;
+    box-sizing: border-box;
+    outline-color: var(--color-base);
+    color: var(--color-base);
+    &:hover:enabled {
+      outline-color: var(--color-shade);
+      box-shadow: 0px 15px 20px rgba(var(--color-shade-rgb), 0.4);
+      transform: translateY(-7px);
+      color: var(--color-shade);
+    }
+    &:active:enabled {
+      outline-color: var(--color-tint);
+      color: var(--color-tint);
+    }
+  }
+  &--type-blank {
+    padding: 4px;
+    box-sizing: border-box;
+    box-shadow: none;
+    height: auto;
+    background: none;
+    box-sizing: border-box;
+    outline-color: none;
+    color: var(--color-contrast);
+    &:hover:enabled {
+      transform: none;
+      color: var(--color-shade);
+    }
+    &:active:enabled {
+      color: var(--color-tint);
+    }
+  }
+}

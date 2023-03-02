@@ -1,0 +1,38 @@
+{
+  "backend": {
+    "chat": {
+      "welcome": "Benvenuto su nowty, sto usanto le api di Completion di OpenAI con la tua apikey, questo comporterà dei costi se hai collegato un metodo di pagamento, per maggiori informazioni clicca sui seguenti link:\n\n<a target=\"_blank\" href=\"https://platform.openai.com/examples/default-qa\">Completion API</a>\n<a target=\"_blank\" href=\"https://openai.com/api/pricing/\">Listino prezzi</a>\n<a target=\"_blank\" href=\"https://elephas.app/blog/how-to-create-openai-api-keys-cl5c4f21d281431po7k8fgyol0\">Come ricevere una chiave api</a>",
+      "welcome_turbo": "Benvenuto su nowty, sto usanto le api di Chat Completion di OpenAI con la tua apikey, questo comporterà dei costi se hai collegato un metodo di pagamento, per maggiori informazioni clicca sui seguenti link:\n\n<a target=\"_blank\" href=\"https://platform.openai.com/docs/guides/chat/chat-completions-beta\">Chat Completion API</a>\n<a target=\"_blank\" href=\"https://openai.com/api/pricing/\">Listino prezzi</a>\n<a target=\"_blank\" href=\"https://elephas.app/blog/how-to-create-openai-api-keys-cl5c4f21d281431po7k8fgyol0\">Come ricevere una chiave api</a>\n\nInoltre le api di Chat Completion usano il modello: gpt-3.5-turbo che integra la moderazione delle risposte",
+      "question": "Domanda",
+      "answer": "Risposta"
+    }
+  },
+  "frontend": {
+    "app_name": "nowty",
+    "submit_key": {
+      "input_placeholder": "Inserisci la tua apikey"
+    },
+    "chats": {
+      "add_davinci_chat": "Davinci Chat",
+      "add_turbo_chat": "Turbo Chat",
+      "reset_api_key": "Reset Api Key",
+      "textarea_placeholder": "Scrivi qui il messaggio",
+      "generic_title_list_elem": "Nuova chat",
+      "types": {
+        "turbo": "Turbo",
+        "davinci": "Davinci"
+      }
+    },
+    "errors": {
+      "COMMON_ERROR": "Errore generico, per piacere riprova più tardi",
+      "OPENAI": {
+        "NO_API_KEY": "Non hai inserito nessuna apikey",
+        "API_KEY_ERROR": "L'apikey fornita non è valida"
+      },
+      "CHAT": {
+        "CANNOT_CREATE_NEW_EMPTY_CHAT_EXISTING_ONE": "Non puoi avere più di una chat nuova",
+        "NO_CHAT_FOUND": "Nessuna chat disponibile"
+      }
+    }
+  }
+}

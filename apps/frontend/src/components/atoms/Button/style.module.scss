@@ -78,7 +78,7 @@
     --color-tint: var(--color-light-tint);
   }
   &:focus {
-    outline-color: var(--color-contrast);
+    color: var(--color-background-contrast);
   }
   &--type-fill {
     background-color: var(--color-base);

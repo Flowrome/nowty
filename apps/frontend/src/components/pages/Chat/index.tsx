@@ -144,7 +144,7 @@ export const Chat = () => {
               `${
                 import.meta.env.FE_API_BASEURL
               }/message/send/${chatId}?turbo=${Number(chat?.is_turbo)}&lang=${
-                window?.navigator?.language || import.meta.env.FE_DEFAULT_LANG
+                window?.navigator?.language.split('-')[0].split('_')[0].toLowerCase() || import.meta.env.FE_DEFAULT_LANG
               }`,
               {
                 method: "POST",

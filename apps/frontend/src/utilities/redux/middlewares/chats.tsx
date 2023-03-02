@@ -57,7 +57,7 @@ listenerMiddleware.startListening({
     const response = await fetch(
       `${import.meta.env.FE_API_BASEURL}/chat/new?turbo=${
         action.type === "chats/newChat" ? 0 : 1
-      }&lang=${window?.navigator?.language || import.meta.env.FE_DEFAULT_LANG}`,
+      }&lang=${window?.navigator?.language.split('-')[0].split('_')[0].toLowerCase() || import.meta.env.FE_DEFAULT_LANG}`,
       {
         method: "POST",
       }
